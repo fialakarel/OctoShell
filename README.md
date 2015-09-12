@@ -16,7 +16,6 @@ Simple shell interface for OctoPrint
 
 api_key="abc..."
 printer="http://IP:PORT/api"
-   </code>
 ```
 
 ## Use it
