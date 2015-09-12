@@ -20,9 +20,9 @@ printer="http://IP:PORT/api"
 
 ## Use it
 
-* ./OctoShell.sh status
-* ./OctoShell.sh upload file.gcode [AnotherFile.gcode]
-* ./OctoShell.sh uploadprint file.gcode
+* `./OctoShell.sh status`
+* `./OctoShell.sh upload file.gcode [AnotherFile.gcode]`
+* `./OctoShell.sh uploadprint file.gcode`
  
 
 ## Aliases
