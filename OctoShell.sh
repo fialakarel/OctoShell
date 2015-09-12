@@ -23,15 +23,31 @@ he1=$(echo "$x" | head -n 4 | tail -n 1)
 he2=$(echo "$x" | head -n 5 | tail -n 1)
 
 
-x=$(curl -s -H "X-Api-Key: $api_key" $printer/job | grep -E "(completion|printTime|printTimeLest)")
+x=$(curl -s -H "X-Api-Key: $api_key" $printer/job | grep -E "(completion|printTime|printTimeLest)" | cut -d":" -f 2 | sed "s/\"//g;s/,//g;s/ //g")
 
-comp=$(echo "$x" | head -n 1 | grep -o "[0-9]*\.[0-9][0-9]")
-time=$(echo "$x" | head -n 2 | tail -n 1 | grep -o "[0-9]*")
-time_left=$(echo "$x" | head -n 3 | tail -n 1 | grep -o "[0-9]*")
+comp=$(echo "$x" | head -n 1 )
+time=$(echo "$x" | head -n 2 | tail -n 1 )
+time_left=$(echo "$x" | head -n 3 | tail -n 1 )
+
+if [ $comp == "null" ]
+then
+	comp=""
+else
+	comp="$comp %%"
+fi
+
+if [ $time == "null" ]
+then
+	time=0
+fi
+
+if [ $time_left == "null" ]
+then
+	time_left=0
+fi
 
 
-
-printf "\n Time: `date +"%H:%M:%S"`\nState: $state $comp %%\n  Bed:  $bed1 /  $bed2\n   HE: $he1 / $he2\n Time: `date -d@$time -u +%H:%M:%S` / `date -d@$time_left -u +%H:%M:%S`\n"
+printf "\n Time: `date +"%H:%M:%S"`\nState: $state $comp\n  Bed:  $bed1 /  $bed2\n   HE: $he1 / $he2\n Time: `date -d@$time -u +%H:%M:%S` / `date -d@$time_left -u +%H:%M:%S`\n"
 
 fi
 
