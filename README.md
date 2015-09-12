@@ -16,6 +16,10 @@ Simple shell interface for OctoPrint
 
 api_key="abc..."
 printer="http://IP:PORT/api"
+
+3. install `jq` cli JSON parser
+```
+sudo apt-get install jq
 ```
 
 ## Use it
