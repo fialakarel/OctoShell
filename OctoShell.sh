@@ -88,7 +88,7 @@ function do_printfile() {
         printf "\n\n\tNumber of file to print: "
         read num_to_print
         
-        curl -s -H "X-Api-Key: $api_key" -H "Content-Type: application/json" -X POST -d '{"command":"select","print":"false"}' $printer/files/local/${x[$num_to_print]} 
+        curl -s -H "X-Api-Key: $api_key" -H "Content-Type: application/json" -X POST -d '{"command":"select","print":"true"}' $printer/files/local/${x[$num_to_print]} 
 
 }
 
