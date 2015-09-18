@@ -62,6 +62,17 @@ function do_uploadprint() {
 	curl -H "X-Api-Key: $api_key" -F select=true -F print=true -F file=@$1 "$printer/files/local" 
 }
 
+function do_getfiles() {
+
+        q1=$(curl -s -H "X-Api-Key: $api_key" $printer/files/local | jq -r '.files[].name')
+        printf "\n\n\tFiles in printer:\n\n"
+        for f in $q1
+        do
+            printf "\t$f\n"
+        done
+        printf "\n\n"
+}
+
 
 # ***** *****  main ***** *****
 
@@ -76,6 +87,11 @@ then
 elif [ $1 == "uploadprint" ]
 then
     do_uploadprint "$@"
+
+
+elif [ $1 == "list" ]
+then
+    do_getfiles
 fi
 
 exit 0
