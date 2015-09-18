@@ -35,4 +35,8 @@ alias octoshell-status='~/OctoShell/OctoShell.sh status'
 alias octoshell-watch='watch -n 5 ~/OctoShell/OctoShell.sh status'
 alias octoshell-upload='~/OctoShell/OctoShell.sh upload'
 alias octoshell-upload-print='~/OctoShell/OctoShell.sh uploadprint'
+alias octoshell-print='~/OctoShell/OctoShell.sh print'
+alias octoshell-list='~/OctoShell/OctoShell.sh list'
+alias octoshell-cancel='~/OctoShell/OctoShell.sh cancel'
+
 ```
