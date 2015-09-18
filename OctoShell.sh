@@ -18,6 +18,12 @@ function do_status() {
 
         # query printer
         q1=$(curl -s -H "X-Api-Key: $api_key" $printer/printer)
+               
+        if [ $? -ne 0 ]
+        then
+            printf "\n\nFailed to get status\n\n"
+            exit 1
+        fi
 
         # parse arguments
         state=$(echo "$q1" | jq -r '.state.text')
@@ -28,6 +34,12 @@ function do_status() {
         
         # query job
         q2=$(curl -s -H "X-Api-Key: $api_key" $printer/job)
+        
+        if [ $? -ne 0 ]
+        then
+            printf "\n\nFailed to get status\n\n"
+            exit 1
+        fi
 
         # parse arguments
         comp=$(echo "$q2" |  jq -r '.progress.completion' )
