@@ -92,6 +92,12 @@ function do_printfile() {
 
 }
 
+function do_cancel() {
+
+        curl -s -H "X-Api-Key: $api_key" -H "Content-Type: application/json" -X POST -d '{"command":"cancel"}' $printer/job 
+
+}
+
 
 # ***** *****  main ***** *****
 
@@ -116,7 +122,11 @@ then
 elif [ $1 == "print" ]
 then
     do_printfile
+
     
+elif [ $1 == "cancel" ]
+then
+    do_cancel
     
 fi
 
