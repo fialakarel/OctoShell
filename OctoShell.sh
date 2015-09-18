@@ -73,6 +73,25 @@ function do_getfiles() {
         printf "\n\n"
 }
 
+function do_printfile() {
+
+        q1=$(curl -s -H "X-Api-Key: $api_key" $printer/files/local | jq -r '.files[].name')
+        printf "\n\n\tFiles in printer:\n\n"  
+        declare -a x
+        n=0
+        for f in $q1
+        do
+            printf "\t$n) $f\n"
+            x[$n]=$f
+            ((n++))
+        done
+        printf "\n\n\tNumber of file to print: "
+        read num_to_print
+        
+        curl -s -H "X-Api-Key: $api_key" -H "Content-Type: application/json" -X POST -d '{"command":"select","print":"false"}' $printer/files/local/${x[$num_to_print]} 
+
+}
+
 
 # ***** *****  main ***** *****
 
@@ -92,6 +111,13 @@ then
 elif [ $1 == "list" ]
 then
     do_getfiles
+    
+
+elif [ $1 == "print" ]
+then
+    do_printfile
+    
+    
 fi
 
 exit 0
